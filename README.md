@@ -209,8 +209,9 @@ docs/                       Decision record, MCP substitution record, endpoint i
 project.yml                 XcodeGen source for BharatStockWidget.xcodeproj, which is generated.
 ```
 
-The Xcode project is generated, not committed as the source of truth. Edit `project.yml` and run
-`make project`.
+`BharatStockWidget.xcodeproj` is committed so the repo opens without XcodeGen installed, but
+`project.yml` is the source of truth. Change targets, settings or entitlements there and run
+`make project` — editing the `.xcodeproj` directly will be overwritten on the next generation.
 
 ### Two things worth knowing before changing anything
 
