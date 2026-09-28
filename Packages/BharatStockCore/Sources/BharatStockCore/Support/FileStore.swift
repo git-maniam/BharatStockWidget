@@ -107,25 +107,61 @@ public struct FileStore: Sendable {
     /// user wrote before this mechanism existed, and silently deleting it would lose their data.
     public func linkFriendlyConfigPath(to target: URL) throws -> FriendlyLinkOutcome {
         let link = AppPaths.friendlyConfigLink
+        if target.standardizedFileURL != link.standardizedFileURL {
+            try ensureDirectory(AppPaths.friendlyConfigDirectory)
+            let existing = try? fileManager.destinationOfSymbolicLink(atPath: link.path)
+            if let existing {
+                let resolved = URL(fileURLWithPath: existing, relativeTo: AppPaths.friendlyConfigDirectory)
+                if resolved.standardizedFileURL != target.standardizedFileURL {
+                    try fileManager.removeItem(at: link)
+                    try fileManager.createSymbolicLink(at: link, withDestinationURL: target)
+                }
+            } else if !fileManager.fileExists(atPath: link.path) {
+                try fileManager.createSymbolicLink(at: link, withDestinationURL: target)
+            }
+        }
+
+        // Also keep ~/.bharatstock.json pointed to target
+        let homeConfig = fileManager.homeDirectoryForCurrentUser.appending(path: ".bharatstock.json", directoryHint: .notDirectory)
+        if target.standardizedFileURL != homeConfig.standardizedFileURL {
+            if let dest = try? fileManager.destinationOfSymbolicLink(atPath: homeConfig.path) {
+                if URL(fileURLWithPath: dest).standardizedFileURL != target.standardizedFileURL {
+                    try? fileManager.removeItem(at: homeConfig)
+                    try? fileManager.createSymbolicLink(at: homeConfig, withDestinationURL: target)
+                }
+            } else if !fileManager.fileExists(atPath: homeConfig.path) {
+                try? fileManager.createSymbolicLink(at: homeConfig, withDestinationURL: target)
+            }
+        }
+
+        // Keep fallback Group Container directory pointed to target if it exists
+        let fallbackGroupDir = fileManager.homeDirectoryForCurrentUser
+            .appending(path: "Library/Group Containers/\(AppIdentity.appGroupFallback)", directoryHint: .isDirectory)
+        let fallbackConfig = fallbackGroupDir.appending(path: "config.json", directoryHint: .notDirectory)
+        if fileManager.fileExists(atPath: fallbackGroupDir.path), target.standardizedFileURL != fallbackConfig.standardizedFileURL {
+            if let dest = try? fileManager.destinationOfSymbolicLink(atPath: fallbackConfig.path) {
+                if URL(fileURLWithPath: dest).standardizedFileURL != target.standardizedFileURL {
+                    try? fileManager.removeItem(at: fallbackConfig)
+                    try? fileManager.createSymbolicLink(at: fallbackConfig, withDestinationURL: target)
+                }
+            } else {
+                try? fileManager.removeItem(at: fallbackConfig)
+                try? fileManager.createSymbolicLink(at: fallbackConfig, withDestinationURL: target)
+            }
+        }
+
         if target.standardizedFileURL == link.standardizedFileURL {
             return .alreadyCorrect
         }
-        try ensureDirectory(AppPaths.friendlyConfigDirectory)
-
         let existing = try? fileManager.destinationOfSymbolicLink(atPath: link.path)
         if let existing {
             let resolved = URL(fileURLWithPath: existing, relativeTo: AppPaths.friendlyConfigDirectory)
             if resolved.standardizedFileURL == target.standardizedFileURL { return .alreadyCorrect }
-            try fileManager.removeItem(at: link)
-            try fileManager.createSymbolicLink(at: link, withDestinationURL: target)
             return .repointed(from: existing)
         }
-
         if fileManager.fileExists(atPath: link.path) {
             return .blockedByRegularFile(link)
         }
-
-        try fileManager.createSymbolicLink(at: link, withDestinationURL: target)
         return .created
     }
 

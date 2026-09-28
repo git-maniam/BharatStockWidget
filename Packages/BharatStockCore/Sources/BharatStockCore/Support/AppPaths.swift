@@ -91,26 +91,59 @@ public struct AppPaths: Sendable, Equatable {
 
     // MARK: - Resolution
 
-    /// The real App Group container, or nil when entitlements are missing or the group is
-    /// unregistered — which is exactly what an unsigned build looks like.
+    /// The real App Group container, or nil when entitlements are missing, the group is
+    /// unregistered, or we are running an ad-hoc build without a Team ID.
+    ///
+    /// On macOS, App Sandbox only permits access to Group Containers when the identifier is
+    /// prefixed with a registered Apple Developer Team ID (`<TeamID>.group.…`).
+    /// For ad-hoc / local builds without a Team ID (e.g. `group.…`), macOS App Sandbox blocks
+    /// access to `~/Library/Group Containers/`, causing file operations to throw permission denied.
     public static func appGroupContainer(
         identifier: String = AppIdentity.appGroupIdentifier
     ) -> URL? {
-        FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: identifier)
+        guard identifier.contains(".group.") else {
+            return nil
+        }
+        guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: identifier) else {
+            return nil
+        }
+        let probe = url.appending(path: ".probe_\(ProcessInfo.processInfo.processIdentifier)", directoryHint: .notDirectory)
+        do {
+            try Data().write(to: probe, options: .atomic)
+            try? FileManager.default.removeItem(at: probe)
+            return url
+        } catch {
+            return nil
+        }
     }
 
-    /// Paths for normal operation. Falls back to `~/Library/Application Support/BharatStockWidget`
-    /// so an unsigned or sandbox-less build (notably the `--dry-run` tool) still functions.
+    /// Directory used for local development when no Apple Developer Team ID is available.
+    ///
+    /// Both the sandboxed widget extension and the unsandboxed companion app use the widget's
+    /// container directory, allowing the widget to read and write without sandbox permission denials.
+    public static func localSharedContainerURL() -> URL {
+        let appSupport = URL.applicationSupportDirectory
+        if appSupport.path().contains("/Containers/\(AppIdentity.widgetBundleID)/") {
+            return appSupport.appending(path: "BharatStockWidget", directoryHint: .isDirectory)
+        }
+        return FileManager.default.homeDirectoryForCurrentUser
+            .appending(
+                path: "Library/Containers/\(AppIdentity.widgetBundleID)/Data/Library/Application Support/BharatStockWidget",
+                directoryHint: .isDirectory
+            )
+    }
+
+    /// Paths for normal operation. Falls back to the widget's local container directory
+    /// so an ad-hoc or sandbox-less build still functions without permission errors.
     public static func resolved() -> AppPaths {
         if let container = appGroupContainer() {
             return AppPaths(root: container)
         }
-        return AppPaths(root: friendlyConfigDirectory)
+        return AppPaths(root: localSharedContainerURL())
     }
 
-    /// True when we fell back, i.e. the widget and app are *not* sharing a container.
-    /// The app surfaces this because it means the widget will show nothing.
+    /// True when we are using a shared container (either via an official App Group or local container sharing).
     public var isUsingAppGroupContainer: Bool {
-        AppPaths.appGroupContainer().map { $0.standardizedFileURL == root.standardizedFileURL } ?? false
+        AppPaths.appGroupContainer() != nil || root.path().contains("/Containers/\(AppIdentity.widgetBundleID)/")
     }
 }
