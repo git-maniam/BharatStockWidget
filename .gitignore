@@ -1,0 +1,10 @@
+.DS_Store
+.build/
+.swiftpm/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+DerivedData/
+build/
+# The generated config holds a live API key. It lives outside the repo, but guard against
+# anyone copying one in.
+config.json

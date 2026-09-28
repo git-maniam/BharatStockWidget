@@ -1,0 +1,54 @@
+[
+  {
+    "symbol": "RELIANCE",
+    "company_name": "Reliance Industries Limited",
+    "trade_date": "2026-09-25",
+    "open": 1210.5,
+    "high": 1227.4,
+    "low": 1210.5,
+    "close": 1226.0,
+    "prev_close": 1219.2,
+    "change_pct": 0.56,
+    "volume": 13138735,
+    "found": true
+  },
+  {
+    "symbol": "TCS",
+    "company_name": "Tata Consultancy Services Limited",
+    "trade_date": "2026-09-25",
+    "open": 2054.0,
+    "high": 2090.2,
+    "low": 2038.1,
+    "close": 2082.0,
+    "prev_close": 2087.0,
+    "change_pct": -0.24,
+    "volume": 3342195,
+    "found": true
+  },
+  {
+    "symbol": "HDFCBANK",
+    "company_name": "HDFC Bank Limited",
+    "trade_date": "2026-09-25",
+    "open": 723.0,
+    "high": 739.65,
+    "low": 723.0,
+    "close": 735.6,
+    "prev_close": 728.9,
+    "change_pct": 0.92,
+    "volume": 19853034,
+    "found": true
+  },
+  {
+    "symbol": "NOTATICKER",
+    "company_name": null,
+    "trade_date": null,
+    "open": null,
+    "high": null,
+    "low": null,
+    "close": null,
+    "prev_close": null,
+    "change_pct": null,
+    "volume": null,
+    "found": false
+  }
+]
