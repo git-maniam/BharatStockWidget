@@ -20,13 +20,13 @@ settingGroups:
     SWIFT_STRICT_CONCURRENCY: complete
     SWIFT_UPCOMING_FEATURE_CONCURRENCY: YES
     MACOSX_DEPLOYMENT_TARGET: "26.0"
-    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_STYLE: $(CODE_SIGN_STYLE)
+    CODE_SIGNING_ALLOWED: $(CODE_SIGNING_ALLOWED)
     ENABLE_HARDENED_RUNTIME: YES
     MARKETING_VERSION: "1.0"
     CURRENT_PROJECT_VERSION: "1"
-    # The App Group identifier must be Team-ID-prefixed on macOS. Both targets read it back at
-    # runtime from their Info.plist, so this is the single place it is defined.
-    BSW_APP_GROUP: $(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget
+    # BSW_APP_GROUP, CODE_SIGN_STYLE, CODE_SIGNING_ALLOWED are defined in Config/Signing.xcconfig
+
 
 targets:
   BharatStockApp:
@@ -86,3 +86,11 @@ schemes:
     # project, which is the point of keeping the core in SPM.
     test:
       config: Debug
+
+  BharatStockWidgetExtension:
+    build:
+      targets:
+        BharatStockWidgetExtension: all
+    run:
+      config: Debug
+

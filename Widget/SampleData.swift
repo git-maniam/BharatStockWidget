@@ -72,7 +72,7 @@ enum SampleData {
         if status != .ok {
             cache.rows = cache.rows.map { row in
                 var row = row
-                row.state = status == .authError || status == .configError ? .stale : .stale
+                row.state = status == .authError || status == .configError ? .error : .stale
                 row.note = message(for: status)
                 return row
             }

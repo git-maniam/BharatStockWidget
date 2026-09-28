@@ -93,7 +93,13 @@ struct QuoteRowView: View {
             HStack(spacing: 5) {
                 labelledPrice("L", row.stock?.low)
                 labelledPrice("H", row.stock?.high)
+                if let dateLabel = stockDateLabel {
+                    Text(dateLabel)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
+            .lineLimit(1)
         } else {
             // §7: NAV is the required value for a fund, always beside its date.
             HStack(spacing: 5) {
@@ -171,6 +177,13 @@ struct QuoteRowView: View {
         if navDate == today { return "NAV today" }
         guard let short = NumberFormatting.shortMarketDate(navDate) else { return nil }
         return "NAV · \(short)"
+    }
+
+    /// Label completed trading session date for stocks, e.g. "· 25 Sep".
+    private var stockDateLabel: String? {
+        guard let tradeDate = row.stock?.tradeDate else { return nil }
+        guard let short = NumberFormatting.shortMarketDate(tradeDate) else { return nil }
+        return "· \(short)"
     }
 
     private var unavailableText: String {

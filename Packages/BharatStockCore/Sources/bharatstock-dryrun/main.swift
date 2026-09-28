@@ -21,6 +21,7 @@ struct DryRun {
             return
         }
         let jsonOnly = arguments.contains("--json")
+        let live = arguments.contains("--live")
         let explicitConfig = value(of: "--config", in: arguments).map {
             URL(filePath: $0, directoryHint: .notDirectory)
         }
@@ -41,11 +42,11 @@ struct DryRun {
             try store.writeAtomically(configSource, to: paths.config, mode: FileStore.ownerOnly)
 
             if !jsonOnly {
-                print("BharatStock Widget — dry run")
+                print("BharatStock Widget — \(live ? "live run" : "dry run")")
                 print(String(repeating: "=", count: 72))
                 print("Config source : \(origin)")
                 print("Sandbox       : \(sandbox.path)")
-                print("Data source   : bundled fixtures (no network, no budget spent)")
+                print("Data source   : \(live ? "BharatStock REST API (live network)" : "bundled fixtures (no network, no budget spent)")")
                 print("")
             }
 
@@ -53,11 +54,19 @@ struct DryRun {
             let parsed = try ConfigLoader().load(contentsOf: paths.config)
             if !jsonOnly { printConfigReport(parsed) }
 
-            let outcome = await RefreshCoordinator(
-                paths: paths,
-                gate: RefreshGate(paths: paths),
-                makeSource: { _, _ in FixtureSource() }
-            ).refreshNow()
+            let outcome: RefreshOutcome
+            if live {
+                outcome = await RefreshCoordinator(
+                    paths: paths,
+                    gate: RefreshGate(paths: paths)
+                ).refreshNow()
+            } else {
+                outcome = await RefreshCoordinator(
+                    paths: paths,
+                    gate: RefreshGate(paths: paths),
+                    makeSource: { _, _ in FixtureSource() }
+                ).refreshNow()
+            }
 
             if jsonOnly {
                 print(try String(decoding: JSONCoding.encoder.encode(outcome.cache), as: UTF8.self))

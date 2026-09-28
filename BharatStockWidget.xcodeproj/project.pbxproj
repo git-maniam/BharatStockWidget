@@ -227,11 +227,11 @@
 				TargetAttributes = {
 					3D3848E4CE10B27EA5435C5A = {
 						DevelopmentTeam = "";
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = "$(CODE_SIGN_STYLE)";
 					};
 					8ACE7E853E4F37ED687E7D43 = {
 						DevelopmentTeam = "";
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = "$(CODE_SIGN_STYLE)";
 					};
 				};
 			};
@@ -299,9 +299,9 @@
 		3DE27D31C37B853EC613BE95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGNING_ALLOWED = "$(CODE_SIGNING_ALLOWED)";
 				CODE_SIGN_ENTITLEMENTS = Widget/BharatStockWidget.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = "$(CODE_SIGN_STYLE)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
@@ -328,9 +328,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGNING_ALLOWED = "$(CODE_SIGNING_ALLOWED)";
 				CODE_SIGN_ENTITLEMENTS = App/BharatStockApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = "$(CODE_SIGN_STYLE)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
@@ -476,9 +476,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGNING_ALLOWED = "$(CODE_SIGNING_ALLOWED)";
 				CODE_SIGN_ENTITLEMENTS = App/BharatStockApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = "$(CODE_SIGN_STYLE)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = NO;
@@ -502,9 +502,9 @@
 		F4BBBCC437ED0AA8371878B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGNING_ALLOWED = "$(CODE_SIGNING_ALLOWED)";
 				CODE_SIGN_ENTITLEMENTS = Widget/BharatStockWidget.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = "$(CODE_SIGN_STYLE)";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;

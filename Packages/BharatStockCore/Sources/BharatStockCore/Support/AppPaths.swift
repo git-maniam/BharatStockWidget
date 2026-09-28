@@ -18,7 +18,8 @@ public enum AppIdentity {
     public static var appGroupIdentifier: String {
         let key = "BSWAppGroupIdentifier"
         if let value = Bundle.main.object(forInfoDictionaryKey: key) as? String, !value.isEmpty {
-            return value
+            let trimmed = value.hasPrefix(".") ? String(value.dropFirst()) : value
+            return trimmed.isEmpty ? appGroupFallback : trimmed
         }
         return appGroupFallback
     }

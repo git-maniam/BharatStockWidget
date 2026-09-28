@@ -107,6 +107,9 @@ public struct FileStore: Sendable {
     /// user wrote before this mechanism existed, and silently deleting it would lose their data.
     public func linkFriendlyConfigPath(to target: URL) throws -> FriendlyLinkOutcome {
         let link = AppPaths.friendlyConfigLink
+        if target.standardizedFileURL == link.standardizedFileURL {
+            return .alreadyCorrect
+        }
         try ensureDirectory(AppPaths.friendlyConfigDirectory)
 
         let existing = try? fileManager.destinationOfSymbolicLink(atPath: link.path)

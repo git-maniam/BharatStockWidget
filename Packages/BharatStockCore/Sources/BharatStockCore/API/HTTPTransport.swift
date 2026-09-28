@@ -39,7 +39,7 @@ public struct URLSessionTransport: HTTPTransport {
             return (data, http)
         } catch let error as APIError {
             throw error
-        } catch let error as URLError {
+        } catch {
             throw APIError.transport(error.localizedDescription)
         }
     }

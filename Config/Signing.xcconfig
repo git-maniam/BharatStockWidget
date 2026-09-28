@@ -12,3 +12,16 @@
 // `make build` and `make test` work without it. `make install` needs it.
 
 DEVELOPMENT_TEAM =
+
+// Default to CODE_SIGNING_ALLOWED = NO so Xcode and command-line builds compile immediately
+// without requiring an Apple Developer certificate.
+// When you set DEVELOPMENT_TEAM, set CODE_SIGNING_ALLOWED = YES.
+CODE_SIGNING_ALLOWED = NO
+CODE_SIGN_STYLE = Automatic
+
+// App Group identifier:
+// Defaults to the un-prefixed group name for local development.
+// If signing with a Team ID, prefix with $(DEVELOPMENT_TEAM).
+// e.g.: BSW_APP_GROUP = $(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget
+BSW_APP_GROUP = group.com.ravisubramaniam.bharatstockwidget
+

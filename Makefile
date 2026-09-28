@@ -64,7 +64,12 @@ open: $(PROJECT)
 .PHONY: build
 build: $(PROJECT)
 	xcodebuild -project $(PROJECT) -scheme $(SCHEME) -configuration $(CONFIGURATION) \
-		-destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO build
+		-destination 'platform=macOS' build
+
+.PHONY: widget
+widget: $(PROJECT)
+	xcodebuild -project $(PROJECT) -scheme BharatStockWidgetExtension -configuration $(CONFIGURATION) \
+		-destination 'platform=macOS' build
 
 .PHONY: release
 release:
@@ -76,13 +81,17 @@ test:
 
 .PHONY: test-live
 test-live:
-	@if [ -z "$$BHARATSTOCK_API_KEY" ]; then \
+	@key="$${BHARATSTOCK_API_KEY}"; \
+	if [ -z "$$key" ] && [ -f "$$HOME/.bharatstock.json" ]; then \
+		key=$$(grep -o '"apiKey"[[:space:]]*:[[:space:]]*"[^"]*"' "$$HOME/.bharatstock.json" | head -1 | sed -E 's/.*"apiKey"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/'); \
+	fi; \
+	if [ -z "$$key" ] || [ "$$key" = "bsk_live_replace_me" ]; then \
 		echo "BHARATSTOCK_API_KEY is not set."; \
 		echo "These tests call the live API and spend about 6 requests from your daily ceiling."; \
 		echo "Run: BHARATSTOCK_API_KEY=bsk_live_... make test-live"; \
 		exit 1; \
-	fi
-	cd $(CORE) && BHARATSTOCK_LIVE_TEST=1 swift test --filter LiveAPITests
+	fi; \
+	cd $(CORE) && BHARATSTOCK_LIVE_TEST=1 BHARATSTOCK_API_KEY="$$key" swift test --filter LiveAPITests
 
 .PHONY: dry-run
 dry-run:
@@ -93,7 +102,7 @@ dry-run-json:
 	@cd $(CORE) && swift run bharatstock-dryrun --json 2>/dev/null
 
 .PHONY: check
-check: project test build dry-run
+check: project test build widget dry-run
 	@echo ""
 	@echo "All checks passed."
 
@@ -104,35 +113,28 @@ check: project test build dry-run
 install: $(PROJECT)
 	@team=$$(sed -n 's/^DEVELOPMENT_TEAM[[:space:]]*=[[:space:]]*//p' Config/Signing.xcconfig | tr -d '[:space:]'); \
 	if [ -z "$$team" ]; then \
-		echo "DEVELOPMENT_TEAM is not set in Config/Signing.xcconfig."; \
-		echo ""; \
-		echo "macOS requires the App Group identifier to be prefixed with your Team ID, and the"; \
-		echo "App Group is the only channel between the widget and the app. Without it the widget"; \
-		echo "installs but shows nothing."; \
-		echo ""; \
-		echo "Find your Team ID with:  security find-identity -v -p codesigning"; \
-		echo "It is the value in parentheses, e.g. \"Apple Development: you@example.com (ABCDE12345)\"."; \
-		exit 1; \
+		echo "Notice: DEVELOPMENT_TEAM is not set in Config/Signing.xcconfig."; \
+		echo "Building for local testing with ad-hoc signing..."; \
 	fi
 	xcodebuild -project $(PROJECT) -scheme $(SCHEME) -configuration Release \
 		-destination 'platform=macOS' -derivedDataPath $(BUILD_DIR) build
 	@rm -rf "/Applications/$(APP_NAME).app"
 	cp -R "$(BUILD_DIR)/Build/Products/Release/$(APP_NAME).app" /Applications/
+	@/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f -R "/Applications/$(APP_NAME).app" 2>/dev/null || true
 	@echo ""
 	@echo "Installed /Applications/$(APP_NAME).app"
 	@echo ""
 	@echo "Next:"
 	@echo "  1. Open it once. That creates the config, the README beside it, and the symlink at"
 	@echo "     $(FRIENDLY_CONFIG)/config.json"
-	@echo "  2. Paste your API key into the setup screen."
-	@echo "  3. Right-click the desktop (or open Notification Centre) -> Edit Widgets -> BharatStock."
+	@echo "  2. Right-click the desktop (or open Notification Centre) -> Edit Widgets -> BharatStock."
 
 .PHONY: uninstall
 uninstall:
 	@echo "Removing the app..."
 	@rm -rf "/Applications/$(APP_NAME).app"
 	@echo "Removing the App Group container (this deletes your config and watchlist)..."
-	@for dir in "$(HOME)/Library/Group Containers/"*$(APP_GROUP_SUFFIX); do \
+	@for dir in "$(HOME)/Library/Group Containers/"*$(APP_GROUP_SUFFIX) "$(HOME)/Library/Group Containers/."*$(APP_GROUP_SUFFIX); do \
 		if [ -d "$$dir" ]; then echo "  $$dir"; rm -rf "$$dir"; fi; \
 	done
 	@echo "Removing the config symlink..."
@@ -159,7 +161,7 @@ console:
 .PHONY: where
 where:
 	@echo "Config (friendly)  : $(FRIENDLY_CONFIG)/config.json"
-	@echo "Config (real)      :"; ls -d "$(HOME)/Library/Group Containers/"*$(APP_GROUP_SUFFIX) 2>/dev/null || echo "  (no App Group container yet — is DEVELOPMENT_TEAM set?)"
+	@echo "Config (real)      :"; ls -d "$(HOME)/Library/Group Containers/"*$(APP_GROUP_SUFFIX) "$(HOME)/Library/Group Containers/."*$(APP_GROUP_SUFFIX) 2>/dev/null || echo "  (no App Group container yet)"
 	@echo "Log                : $(HOME)/Library/Logs/BharatStockWidget/helper.log"
 
 # ---------------------------------------------------------------------------------------------

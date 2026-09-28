@@ -41,6 +41,7 @@ struct QuoteTimelineProvider: TimelineProvider {
     /// Must be fast and must not touch the network — this drives the widget gallery preview.
     func getSnapshot(in context: Context, completion: @escaping (QuoteEntry) -> Void) {
         let paths = AppPaths.resolved()
+        try? ConfigWriter().bootstrap(at: paths)
         completion(
             QuoteEntry(
                 date: .now,
@@ -61,6 +62,7 @@ struct QuoteTimelineProvider: TimelineProvider {
 
         Task {
             let paths = AppPaths.resolved()
+            try? ConfigWriter().bootstrap(at: paths)
             let coordinator = RefreshCoordinator(
                 paths: paths,
                 gate: RefreshGate(paths: paths),

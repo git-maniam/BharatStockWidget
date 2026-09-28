@@ -35,6 +35,9 @@ final class AppModel {
 
     init(paths: AppPaths = .resolved()) {
         self.paths = paths
+        runSetup()
+        reload()
+        startWatching()
     }
 
     // MARK: - Derived state
