@@ -88,8 +88,10 @@ struct NumberFormattingTests {
 
     @Test("The API key is redacted to twelve characters, and scrubbed from free text")
     func redaction() {
-        let key = "bsk_live_REDACTED_SEE_docs_decisions_md"
-        #expect(Redaction.apiKey(key) == "bsk_live_0Rs…")
+        // A synthetic key with the real shape. A test that asserts secrets stay out of logs has
+        // no business embedding a real secret in source control.
+        let key = "bsk_live_FAKEKEY_for_tests_only_0123456789abcdef"
+        #expect(Redaction.apiKey(key) == "bsk_live_FAK…")
         #expect(Redaction.apiKey("") == "(unset)")
         #expect(Redaction.apiKey("short") == "…")
 
@@ -97,7 +99,7 @@ struct NumberFormattingTests {
         let message = "GET /v1/stocks/RELIANCE key=\(key) failed"
         let scrubbed = Redaction.scrub(message, key: key)
         #expect(!scrubbed.contains(key))
-        #expect(scrubbed.contains("bsk_live_0Rs…"))
+        #expect(scrubbed.contains("bsk_live_FAK…"))
 
         // Even a key we were never told about — e.g. echoed back in an API error body.
         let foreign = Redaction.scrub("rejected token bsk_live_SomeOtherKeyEntirely123", key: "")
