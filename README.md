@@ -190,6 +190,7 @@ neither.
 
 ```bash
 make test        # 106 offline tests, no Xcode project needed
+make test-live   # 5 more against the real API (~6 requests from your ceiling)
 make build       # compile every target, no signing required
 make dry-run     # full refresh cycle against fixtures
 make check       # all of the above, in order
@@ -232,6 +233,11 @@ resolved across time zones, a US DST transition, catch-up after a two-day sleep)
 (20 real NSE tickers and 20 real fund names, asserting length and non-ambiguity at three widths),
 atomic cache writes, forward-compatible reads of a `schemaVersion: 2` file, `en_IN` formatting, and
 the retry ladder.
+
+A separate, opt-in suite (`make test-live`) hits the real API to catch the one thing fixtures
+cannot: the response shape drifting away from what the client decodes. It also asserts that MCP is
+still refused for the configured key — if that test ever fails, the plan has been upgraded and
+`docs/mcp-tools.md` should be revisited.
 
 SwiftUI previews cover the size × appearance matrix and every degraded state — see
 `Widget/Previews.swift`.

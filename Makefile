@@ -27,7 +27,8 @@ help:
 	@echo ""
 	@echo "  make build           Compile all targets (Debug; no signing required)"
 	@echo "  make release         Compile all targets (Release)"
-	@echo "  make test            Run the BharatStockCore test suite"
+	@echo "  make test            Run the BharatStockCore test suite (offline)"
+	@echo "  make test-live       Also hit the real API (needs BHARATSTOCK_API_KEY; ~6 requests)"
 	@echo "  make dry-run         Full refresh cycle against fixtures; spends no API budget"
 	@echo "  make dry-run-json    Same, JSON only, for piping into jq"
 	@echo "  make install         Build signed and copy to /Applications, then register the widget"
@@ -72,6 +73,16 @@ release:
 .PHONY: test
 test:
 	cd $(CORE) && swift test
+
+.PHONY: test-live
+test-live:
+	@if [ -z "$$BHARATSTOCK_API_KEY" ]; then \
+		echo "BHARATSTOCK_API_KEY is not set."; \
+		echo "These tests call the live API and spend about 6 requests from your daily ceiling."; \
+		echo "Run: BHARATSTOCK_API_KEY=bsk_live_... make test-live"; \
+		exit 1; \
+	fi
+	cd $(CORE) && BHARATSTOCK_LIVE_TEST=1 swift test --filter LiveAPITests
 
 .PHONY: dry-run
 dry-run:
