@@ -120,7 +120,16 @@ install: $(PROJECT)
 		-destination 'platform=macOS' -derivedDataPath $(BUILD_DIR) build
 	@rm -rf "/Applications/$(APP_NAME).app"
 	cp -R "$(BUILD_DIR)/Build/Products/Release/$(APP_NAME).app" /Applications/
+	@group_id="group.com.ravisubramaniam.bharatstockwidget"; \
+	sed "s/\$$(BSW_APP_GROUP)/$$group_id/g" Widget/BharatStockWidget.entitlements > /tmp/widget.entitlements; \
+	sed "s/\$$(BSW_APP_GROUP)/$$group_id/g" App/BharatStockApp.entitlements > /tmp/app.entitlements; \
+	codesign --force --sign - --entitlements /tmp/widget.entitlements "/Applications/$(APP_NAME).app/Contents/PlugIns/BharatStockWidgetExtension.appex"; \
+	codesign --force --sign - --entitlements /tmp/app.entitlements "/Applications/$(APP_NAME).app"; \
+	rm -f /tmp/widget.entitlements /tmp/app.entitlements
+	@pluginkit -a "/Applications/$(APP_NAME).app/Contents/PlugIns/BharatStockWidgetExtension.appex" 2>/dev/null || true
+	@pluginkit -e use -i com.ravisubramaniam.bharatstockwidget.widget 2>/dev/null || true
 	@/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f -R "/Applications/$(APP_NAME).app" 2>/dev/null || true
+	@killall chronod NotificationCenter 2>/dev/null || true
 	@echo ""
 	@echo "Installed /Applications/$(APP_NAME).app"
 	@echo ""
