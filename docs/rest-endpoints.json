@@ -1,0 +1,1190 @@
+{
+  "_comment": [
+    "Endpoint inventory for the BharatStock REST API, distilled from the live OpenAPI 3.1",
+    "document at https://bharatstockapi.com/openapi.json (captured 2026-09-28).",
+    "This file stands in for the spec's docs/mcp-tools.json, which could not be produced:",
+    "the MCP server refuses the supplied key's plan. See docs/mcp-tools.md for the full record."
+  ],
+  "capturedAt": "2026-09-28",
+  "openapiSource": "https://bharatstockapi.com/openapi.json",
+  "apiVersion": "0.1.0",
+  "baseURL": "https://bharatstockapi.com/v1",
+  "auth": {
+    "header": "X-API-Key",
+    "value": "<your key>"
+  },
+  "endpointsUsedByThisProject": [
+    {
+      "method": "GET",
+      "path": "/v1/stocks/quotes",
+      "summary": "Get Stock Quotes",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "symbols",
+          "in": "query",
+          "required": true,
+          "description": "Comma-separated ticker symbols, e.g. RELIANCE,TCS,INFY (max 50)"
+        }
+      ],
+      "whyChosen": "Batch stock quotes. THE endpoint the widget depends on for stocks."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes/{scheme_code}/nav",
+      "summary": "Get Scheme Nav",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "scheme_code",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": "Start date (YYYY-MM-DD). Default: 1 year ago."
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": "End date (YYYY-MM-DD). Default: today."
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "Max NAV points. Default 400 (~ a trading year)."
+        }
+      ],
+      "whyChosen": "Mutual fund NAV series. One request per fund; no batch variant exists."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes",
+      "summary": "List Schemes",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "description": "Case-insensitive substring match on scheme name."
+        },
+        {
+          "name": "amc",
+          "in": "query",
+          "required": false,
+          "description": "Filter by AMC name (case-insensitive substring)."
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "description": "Filter by AMFI category (case-insensitive substring), e.g. 'Flexi Cap'."
+        },
+        {
+          "name": "plan",
+          "in": "query",
+          "required": false,
+          "description": "Filter by plan, e.g. 'Direct' or 'Regular' (case-insensitive substring)."
+        },
+        {
+          "name": "option",
+          "in": "query",
+          "required": false,
+          "description": "Filter by option, e.g. 'Growth' or 'IDCW' (case-insensitive substring)."
+        },
+        {
+          "name": "isin",
+          "in": "query",
+          "required": false,
+          "description": "Exact match on either ISIN (growth or div-reinvest)."
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "Max rows. Default 50."
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "description": "Rows to skip (pagination)."
+        }
+      ],
+      "whyChosen": "Scheme search, used to look up an AMFI scheme code by name."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/search",
+      "summary": "Search Stocks",
+      "tags": [
+        "search"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "required": true,
+          "description": "Search text, e.g. 'reliance'"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ],
+      "whyChosen": "Stock search, for resolving a ticker from a company name."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/plans",
+      "summary": "Get Plans",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": [],
+      "whyChosen": "Plan limits. Source of the 50/day free-tier ceiling."
+    },
+    {
+      "method": "GET",
+      "path": "/v1/status",
+      "summary": "Get Status",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": [],
+      "whyChosen": "Data-trust status."
+    }
+  ],
+  "allEndpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/stocks",
+      "summary": "List Stocks",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "description": "Search by symbol or company name"
+        },
+        {
+          "name": "sector",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "active_only",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/compare",
+      "summary": "Compare Stocks",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "sector",
+          "in": "query",
+          "required": true,
+          "description": "Sector to compare peers within, e.g. 'Banking'"
+        },
+        {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "description": "Field to sort by: market_cap, pe_ratio, pb_ratio, roe, or roce"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/quotes",
+      "summary": "Get Stock Quotes",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "symbols",
+          "in": "query",
+          "required": true,
+          "description": "Comma-separated ticker symbols, e.g. RELIANCE,TCS,INFY (max 50)"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}",
+      "summary": "Get Stock",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a ticker shared by two different companies across exchanges (e.g. KALYANI). Pass NSE or BSE to pick the intended listing. Alternatively address a listing directly by its ISIN in the path (e.g. /v1/stocks/INE0N6U01018)."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/prices",
+      "summary": "Get Stock Prices",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/financials",
+      "summary": "Get Stock Financials",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "period_type",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/corporate-actions",
+      "summary": "Get Stock Corporate Actions",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "action_type",
+          "in": "query",
+          "required": false,
+          "description": "Filter by type: dividend, bonus, split, rights, buyback, other"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/ratios",
+      "summary": "Get Stock Ratios",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/technical-indicators",
+      "summary": "Get Stock Technical Indicators",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "sma_period",
+          "in": "query",
+          "required": false,
+          "description": "Period for the simple moving average"
+        },
+        {
+          "name": "ema_period",
+          "in": "query",
+          "required": false,
+          "description": "Period for the exponential moving average"
+        },
+        {
+          "name": "rsi_period",
+          "in": "query",
+          "required": false,
+          "description": "Period for RSI (Wilder's smoothing)"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/shareholding",
+      "summary": "Get Stock Shareholding",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/mf-holdings",
+      "summary": "Get Stock Mf Holdings",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "month",
+          "in": "query",
+          "required": false,
+          "description": "Filter by month, format YYYY-MM (e.g. 2026-07)"
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/movers",
+      "summary": "Get Market Movers",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "description": "gainers, losers, or active"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/price-shockers",
+      "summary": "Get Price Shockers",
+      "tags": [
+        "stocks"
+      ],
+      "parameters": [
+        {
+          "name": "min_change_pct",
+          "in": "query",
+          "required": false,
+          "description": "Minimum absolute % move (close vs. prev_close) to qualify, e.g. 5.0"
+        },
+        {
+          "name": "direction",
+          "in": "query",
+          "required": false,
+          "description": "Only 'up' moves, only 'down' moves, or 'both'"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/bulk-deals",
+      "summary": "Get Stock Bulk Deals",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "buy_sell",
+          "in": "query",
+          "required": false,
+          "description": "Filter: BUY or SELL"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/block-deals",
+      "summary": "Get Stock Block Deals",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "buy_sell",
+          "in": "query",
+          "required": false,
+          "description": "Filter: BUY or SELL"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/stocks/{ticker}/insider-trades",
+      "summary": "Get Stock Insider Trades",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "ticker",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "transaction_type",
+          "in": "query",
+          "required": false,
+          "description": "Filter: acquisition or disposal"
+        },
+        {
+          "name": "promoters_only",
+          "in": "query",
+          "required": false,
+          "description": "Only promoter / promoter-group disclosures"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Disambiguate a shared ticker: NSE or BSE (see GET /v1/stocks/{ticker})."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/deals/bulk",
+      "summary": "List Bulk Deals",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "buy_sell",
+          "in": "query",
+          "required": false,
+          "description": "Filter: BUY or SELL"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/deals/block",
+      "summary": "List Block Deals",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "buy_sell",
+          "in": "query",
+          "required": false,
+          "description": "Filter: BUY or SELL"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/insider-trades",
+      "summary": "List Insider Trades",
+      "tags": [
+        "deals"
+      ],
+      "parameters": [
+        {
+          "name": "transaction_type",
+          "in": "query",
+          "required": false,
+          "description": "Filter: acquisition or disposal"
+        },
+        {
+          "name": "promoters_only",
+          "in": "query",
+          "required": false,
+          "description": "Only promoter / promoter-group disclosures"
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/screener",
+      "summary": "Screen Stocks",
+      "tags": [
+        "screener"
+      ],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "description": "Repeatable filter: metric.operator.value (e.g. pe_ratio.lt.15, roe.gt.12)"
+        },
+        {
+          "name": "sector",
+          "in": "query",
+          "required": false,
+          "description": "Sector name (exact match)"
+        },
+        {
+          "name": "exchange",
+          "in": "query",
+          "required": false,
+          "description": "Exchange: NSE or BSE"
+        },
+        {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "description": "Column to sort by"
+        },
+        {
+          "name": "sort_order",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/indices",
+      "summary": "List Indices",
+      "tags": [
+        "indices"
+      ],
+      "parameters": [
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "description": "e.g. BROAD MARKET INDICES, SECTORAL INDICES"
+        },
+        {
+          "name": "active_only",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/indices/{name}/prices",
+      "summary": "Get Index Prices",
+      "tags": [
+        "indices"
+      ],
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "page_size",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/market/fii-dii",
+      "summary": "Get Fii Dii Activity",
+      "tags": [
+        "market"
+      ],
+      "parameters": [
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": "Start date (YYYY-MM-DD). Default: 30 days ago."
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": "End date (YYYY-MM-DD). Default: today."
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "Max rows to return. Default 30."
+        },
+        {
+          "name": "latest",
+          "in": "query",
+          "required": false,
+          "description": "If true, return only the single most recent day's activity (ignores from/to/limit)."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes",
+      "summary": "List Schemes",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "description": "Case-insensitive substring match on scheme name."
+        },
+        {
+          "name": "amc",
+          "in": "query",
+          "required": false,
+          "description": "Filter by AMC name (case-insensitive substring)."
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "description": "Filter by AMFI category (case-insensitive substring), e.g. 'Flexi Cap'."
+        },
+        {
+          "name": "plan",
+          "in": "query",
+          "required": false,
+          "description": "Filter by plan, e.g. 'Direct' or 'Regular' (case-insensitive substring)."
+        },
+        {
+          "name": "option",
+          "in": "query",
+          "required": false,
+          "description": "Filter by option, e.g. 'Growth' or 'IDCW' (case-insensitive substring)."
+        },
+        {
+          "name": "isin",
+          "in": "query",
+          "required": false,
+          "description": "Exact match on either ISIN (growth or div-reinvest)."
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "Max rows. Default 50."
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "required": false,
+          "description": "Rows to skip (pagination)."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes/{scheme_code}",
+      "summary": "Get Scheme",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "scheme_code",
+          "in": "path",
+          "required": true,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes/{scheme_code}/nav",
+      "summary": "Get Scheme Nav",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "scheme_code",
+          "in": "path",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "description": "Start date (YYYY-MM-DD). Default: 1 year ago."
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "description": "End date (YYYY-MM-DD). Default: today."
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": "Max NAV points. Default 400 (~ a trading year)."
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf/schemes/{scheme_code}/returns",
+      "summary": "Get Scheme Returns",
+      "tags": [
+        "mutual-funds"
+      ],
+      "parameters": [
+        {
+          "name": "scheme_code",
+          "in": "path",
+          "required": true,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mcp/authorize",
+      "summary": "Mcp Authorize",
+      "tags": [
+        "mcp",
+        "mcp"
+      ],
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/v1/search",
+      "summary": "Search Stocks",
+      "tags": [
+        "search"
+      ],
+      "parameters": [
+        {
+          "name": "q",
+          "in": "query",
+          "required": true,
+          "description": "Search text, e.g. 'reliance'"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "description": null
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/status",
+      "summary": "Get Status",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/v1/plans",
+      "summary": "Get Plans",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/v1/mf-coverage",
+      "summary": "Get Mf Coverage",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": []
+    },
+    {
+      "method": "GET",
+      "path": "/v1/data-sources",
+      "summary": "Get Data Sources",
+      "tags": [
+        "site",
+        "site"
+      ],
+      "parameters": []
+    }
+  ]
+}

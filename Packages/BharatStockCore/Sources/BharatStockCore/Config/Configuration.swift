@@ -146,11 +146,14 @@ public struct Configuration: Sendable, Equatable {
     public static let starter = Configuration(
         apiKey: "",
         instruments: [
-            Instrument(type: .stock, symbol: "RELIANCE", name: "Reliance Industries"),
+            // No explicit `name` here: the API returns "Reliance Industries Limited", which the
+            // shortener reduces to "Reliance". An explicit name is used verbatim (§7 rule 1), so
+            // spelling one out that overflows would only make the default install truncate.
+            Instrument(type: .stock, symbol: "RELIANCE"),
             Instrument(type: .stock, symbol: "TCS"),
             Instrument(type: .stock, symbol: "HDFCBANK", name: "HDFC Bank"),
-            Instrument(type: .mutualFund, symbol: "122639", name: "Parag Parikh Flexi Cap"),
-            Instrument(type: .mutualFund, symbol: "120828", name: "Quant Small Cap Fund"),
+            Instrument(type: .mutualFund, symbol: "122639", name: "Parag Parikh Flexi"),
+            Instrument(type: .mutualFund, symbol: "120828", name: "Quant Small Cap"),
         ]
     )
 

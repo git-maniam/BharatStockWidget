@@ -1,0 +1,14 @@
+// Signing configuration for BharatStock Widget.
+//
+// Set DEVELOPMENT_TEAM to your 10-character Apple Developer Team ID. A free Apple ID is enough:
+// sign in under Xcode ▸ Settings ▸ Accounts, and the Team ID appears beside your Personal Team
+// (you can also read it from `security find-identity -v -p codesigning`, inside the parentheses
+// of "Apple Development: you@example.com (ABCDE12345)").
+//
+// Why it matters: macOS requires the App Group identifier to be Team-ID-prefixed, and the App
+// Group is the only channel between the widget extension and the container app. With this unset
+// the project still compiles, but the installed widget will not find the cache the app writes.
+//
+// `make build` and `make test` work without it. `make install` needs it.
+
+DEVELOPMENT_TEAM =

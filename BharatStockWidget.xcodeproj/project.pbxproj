@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0337BD64A3ED1C985ED0C96B /* WidgetFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8172E55D5F053A22E37BB37B /* WidgetFooterView.swift */; };
+		07C78FEE57353D696C8520F5 /* BharatStockCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D6330771409CD4591A01861 /* BharatStockCore */; };
+		0BB31097A8D0D0A53ED3C778 /* ConfigWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2581092617CEF6EF2487A320 /* ConfigWatcher.swift */; };
+		11F1F28AA268176B646410B9 /* QuoteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0059D2898DD020DFEB796 /* QuoteRowView.swift */; };
+		14E2EA75828126A6543595F9 /* BharatStockWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8F87C34B9F0128D9A8DD746E /* BharatStockWidgetExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		646422F6830B50F5AFEFF3F9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6879A2F8694FDF4DBB458810 /* MainView.swift */; };
+		86EA3E721CF8941AEA628643 /* BharatStockCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7364E6EAA365062D0372BE90 /* BharatStockCore */; };
+		9B438BCA0E2F308FFB4142A3 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47380EAAB925CEF59B677256 /* SampleData.swift */; };
+		9B9FBD51D1AE879EE1FD253E /* BharatStockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B927A14D02E77AC1005857D9 /* BharatStockApp.swift */; };
+		A41F67502264746D5A305ECD /* QuoteTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E702ED74BD834EA53E435712 /* QuoteTimelineProvider.swift */; };
+		C174DD736ED23709489B395E /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4441A583D62901E220C0334 /* AppModel.swift */; };
+		D87491C8B3D6EFCBBB89E429 /* QuoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4756F33B26082CDD914600FC /* QuoteWidgetView.swift */; };
+		DB5869D3F9567E6DA8795B06 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8326D6C219F4B4EF8C3FD8 /* Appearance.swift */; };
+		E7C17032B5FA3DDF0C347E5E /* BharatStockWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C483286334F3C81496906F02 /* BharatStockWidgetBundle.swift */; };
+		F4E05E46546C08B27B3F1B67 /* Previews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6B0AEC59F3E334F7269B5C /* Previews.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9EE7E0D4EBD6088233A6B4B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D560DB46EAFF39CDEF88FB09 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D3848E4CE10B27EA5435C5A;
+			remoteInfo = BharatStockWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9397431F7EB9B62847406B1B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				14E2EA75828126A6543595F9 /* BharatStockWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C9E6FE89E9B8C56E648EFD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2581092617CEF6EF2487A320 /* ConfigWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigWatcher.swift; sourceTree = "<group>"; };
+		44DA0DE9B40D52EE0D590B03 /* BharatStockCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BharatStockCore; path = Packages/BharatStockCore; sourceTree = SOURCE_ROOT; };
+		47380EAAB925CEF59B677256 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		4756F33B26082CDD914600FC /* QuoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWidgetView.swift; sourceTree = "<group>"; };
+		4DA919FDA560445CAD111C59 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		4F8326D6C219F4B4EF8C3FD8 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		51D22A2E83AFB6C7D5A298D9 /* BharatStockWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BharatStockWidget.entitlements; sourceTree = "<group>"; };
+		6165AA98C0BDA328ED8D5B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6879A2F8694FDF4DBB458810 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8172E55D5F053A22E37BB37B /* WidgetFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFooterView.swift; sourceTree = "<group>"; };
+		8F87C34B9F0128D9A8DD746E /* BharatStockWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BharatStockWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E6B0AEC59F3E334F7269B5C /* Previews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previews.swift; sourceTree = "<group>"; };
+		A4441A583D62901E220C0334 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		B927A14D02E77AC1005857D9 /* BharatStockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatStockApp.swift; sourceTree = "<group>"; };
+		BBD0059D2898DD020DFEB796 /* QuoteRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteRowView.swift; sourceTree = "<group>"; };
+		C483286334F3C81496906F02 /* BharatStockWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BharatStockWidgetBundle.swift; sourceTree = "<group>"; };
+		DC31890235899C8AFEC83D0E /* BharatStockApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BharatStockApp.entitlements; sourceTree = "<group>"; };
+		E702ED74BD834EA53E435712 /* QuoteTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTimelineProvider.swift; sourceTree = "<group>"; };
+		EA92F041FC8E6EEC15D4CC00 /* BharatStockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BharatStockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B19A927A91BA84FD96D2D310 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07C78FEE57353D696C8520F5 /* BharatStockCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C703D868F30DAAAF7F8D28FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86EA3E721CF8941AEA628643 /* BharatStockCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14AC5B3ABFBC1614719BCBDB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6879A2F8694FDF4DBB458810 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B5C3242C7E30ED59D4568E2 = {
+			isa = PBXGroup;
+			children = (
+				3F5DC8C826013BDE5C004D98 /* App */,
+				A2FD15EFF2300BEF923A553E /* Config */,
+				975A7B19D4A4DCF578EC07AA /* Packages */,
+				C25DFEC68938C2AF53387338 /* Widget */,
+				77C2FD1BCE9AA0307ACF9F32 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F3BD524EF226938D9306134 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F8326D6C219F4B4EF8C3FD8 /* Appearance.swift */,
+				BBD0059D2898DD020DFEB796 /* QuoteRowView.swift */,
+				4756F33B26082CDD914600FC /* QuoteWidgetView.swift */,
+				8172E55D5F053A22E37BB37B /* WidgetFooterView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3F5DC8C826013BDE5C004D98 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				14AC5B3ABFBC1614719BCBDB /* Views */,
+				A4441A583D62901E220C0334 /* AppModel.swift */,
+				DC31890235899C8AFEC83D0E /* BharatStockApp.entitlements */,
+				B927A14D02E77AC1005857D9 /* BharatStockApp.swift */,
+				2581092617CEF6EF2487A320 /* ConfigWatcher.swift */,
+				0C9E6FE89E9B8C56E648EFD9 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		77C2FD1BCE9AA0307ACF9F32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA92F041FC8E6EEC15D4CC00 /* BharatStockApp.app */,
+				8F87C34B9F0128D9A8DD746E /* BharatStockWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		975A7B19D4A4DCF578EC07AA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				44DA0DE9B40D52EE0D590B03 /* BharatStockCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		A2FD15EFF2300BEF923A553E /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				4DA919FDA560445CAD111C59 /* Signing.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C25DFEC68938C2AF53387338 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				2F3BD524EF226938D9306134 /* Views */,
+				51D22A2E83AFB6C7D5A298D9 /* BharatStockWidget.entitlements */,
+				C483286334F3C81496906F02 /* BharatStockWidgetBundle.swift */,
+				6165AA98C0BDA328ED8D5B8E /* Info.plist */,
+				9E6B0AEC59F3E334F7269B5C /* Previews.swift */,
+				E702ED74BD834EA53E435712 /* QuoteTimelineProvider.swift */,
+				47380EAAB925CEF59B677256 /* SampleData.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3D3848E4CE10B27EA5435C5A /* BharatStockWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D5EEB36909DA1C528508018 /* Build configuration list for PBXNativeTarget "BharatStockWidgetExtension" */;
+			buildPhases = (
+				9FAD92B6AB1A78E349A31AEC /* Sources */,
+				B19A927A91BA84FD96D2D310 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BharatStockWidgetExtension;
+			packageProductDependencies = (
+				1D6330771409CD4591A01861 /* BharatStockCore */,
+			);
+			productName = BharatStockWidgetExtension;
+			productReference = 8F87C34B9F0128D9A8DD746E /* BharatStockWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		8ACE7E853E4F37ED687E7D43 /* BharatStockApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBD25B5AE36E1B4ED229A542 /* Build configuration list for PBXNativeTarget "BharatStockApp" */;
+			buildPhases = (
+				2A5E7ADCB6CBB075C758AA36 /* Sources */,
+				C703D868F30DAAAF7F8D28FD /* Frameworks */,
+				9397431F7EB9B62847406B1B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B867CB5FDBDC3385CB59AFF /* PBXTargetDependency */,
+			);
+			name = BharatStockApp;
+			packageProductDependencies = (
+				7364E6EAA365062D0372BE90 /* BharatStockCore */,
+			);
+			productName = BharatStockApp;
+			productReference = EA92F041FC8E6EEC15D4CC00 /* BharatStockApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D560DB46EAFF39CDEF88FB09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3D3848E4CE10B27EA5435C5A = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					8ACE7E853E4F37ED687E7D43 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BA29845B90157DFBB255BB80 /* Build configuration list for PBXProject "BharatStockWidget" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2B5C3242C7E30ED59D4568E2;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B31B2F81DCBFC4AC3A3B6055 /* XCLocalSwiftPackageReference "Packages/BharatStockCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 77C2FD1BCE9AA0307ACF9F32 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8ACE7E853E4F37ED687E7D43 /* BharatStockApp */,
+				3D3848E4CE10B27EA5435C5A /* BharatStockWidgetExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A5E7ADCB6CBB075C758AA36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C174DD736ED23709489B395E /* AppModel.swift in Sources */,
+				9B9FBD51D1AE879EE1FD253E /* BharatStockApp.swift in Sources */,
+				0BB31097A8D0D0A53ED3C778 /* ConfigWatcher.swift in Sources */,
+				646422F6830B50F5AFEFF3F9 /* MainView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAD92B6AB1A78E349A31AEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB5869D3F9567E6DA8795B06 /* Appearance.swift in Sources */,
+				E7C17032B5FA3DDF0C347E5E /* BharatStockWidgetBundle.swift in Sources */,
+				F4E05E46546C08B27B3F1B67 /* Previews.swift in Sources */,
+				11F1F28AA268176B646410B9 /* QuoteRowView.swift in Sources */,
+				A41F67502264746D5A305ECD /* QuoteTimelineProvider.swift in Sources */,
+				D87491C8B3D6EFCBBB89E429 /* QuoteWidgetView.swift in Sources */,
+				9B438BCA0E2F308FFB4142A3 /* SampleData.swift in Sources */,
+				0337BD64A3ED1C985ED0C96B /* WidgetFooterView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B867CB5FDBDC3385CB59AFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3D3848E4CE10B27EA5435C5A /* BharatStockWidgetExtension */;
+			targetProxy = 9EE7E0D4EBD6088233A6B4B5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3DE27D31C37B853EC613BE95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGN_ENTITLEMENTS = Widget/BharatStockWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ravisubramaniam.bharatstockwidget.widget;
+				PRODUCT_NAME = BharatStockWidgetExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		707EDE71DC3DB83DC43B2384 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGN_ENTITLEMENTS = App/BharatStockApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ravisubramaniam.bharatstockwidget;
+				PRODUCT_NAME = "BharatStock Widget";
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		8F11C0AAC3A2FA99C9B2BEBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DA919FDA560445CAD111C59 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DC02C9E1ED3F19C17E92B4F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DA919FDA560445CAD111C59 /* Signing.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E3B0E939B9DF1F7FC733D95B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGN_ENTITLEMENTS = App/BharatStockApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ravisubramaniam.bharatstockwidget;
+				PRODUCT_NAME = "BharatStock Widget";
+				SDKROOT = macosx;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F4BBBCC437ED0AA8371878B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BSW_APP_GROUP = "$(DEVELOPMENT_TEAM).group.com.ravisubramaniam.bharatstockwidget";
+				CODE_SIGN_ENTITLEMENTS = Widget/BharatStockWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../../../../Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ravisubramaniam.bharatstockwidget.widget;
+				PRODUCT_NAME = BharatStockWidgetExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_UPCOMING_FEATURE_CONCURRENCY = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D5EEB36909DA1C528508018 /* Build configuration list for PBXNativeTarget "BharatStockWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DE27D31C37B853EC613BE95 /* Debug */,
+				F4BBBCC437ED0AA8371878B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		BA29845B90157DFBB255BB80 /* Build configuration list for PBXProject "BharatStockWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F11C0AAC3A2FA99C9B2BEBB /* Debug */,
+				DC02C9E1ED3F19C17E92B4F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FBD25B5AE36E1B4ED229A542 /* Build configuration list for PBXNativeTarget "BharatStockApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				707EDE71DC3DB83DC43B2384 /* Debug */,
+				E3B0E939B9DF1F7FC733D95B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		B31B2F81DCBFC4AC3A3B6055 /* XCLocalSwiftPackageReference "Packages/BharatStockCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/BharatStockCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1D6330771409CD4591A01861 /* BharatStockCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BharatStockCore;
+		};
+		7364E6EAA365062D0372BE90 /* BharatStockCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BharatStockCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D560DB46EAFF39CDEF88FB09 /* Project object */;
+}

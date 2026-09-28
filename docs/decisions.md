@@ -88,7 +88,25 @@ per day is 6. The `RequestBudget` actor, the five-request reserve, the IST-midni
 five-minute manual-refresh throttle are all still implemented as specified — the ceiling is a safety
 property, and it is shared with anything else using the same key.
 
-### 3.5 Deliverables that change shape
+### 3.5 The container app is not sandboxed; the widget is
+
+Discovered while wiring up entitlements, and it constrains the choice made above. A sandboxed
+process has `~/Library/Application Support` **redirected into its own container**, so a sandboxed
+container app could not create the symlink at the path §4 documents — the very thing that decision
+was meant to preserve. Meanwhile a widget extension *must* be sandboxed; that is not negotiable.
+
+So the two targets differ:
+
+| Target | `com.apple.security.app-sandbox` | Why |
+|---|---|---|
+| `BharatStockApp` | `false` | Needs the real `~/Library/Application Support` to maintain the friendly symlink. Legitimate for a Developer-ID app; would be rejected by the Mac App Store, which is not a target. |
+| `BharatStockWidgetExtension` | `true` | Mandatory for widget extensions. Reads and writes only inside the App Group container. |
+
+App Groups work for a non-sandboxed macOS app provided the entitlement is present and the identifier
+is Team-ID-prefixed, so both targets resolve the same container path. Both also carry
+`com.apple.security.network.client`: the widget for its scheduled fetches, the app for "Refresh now".
+
+### 3.6 Deliverables that change shape
 
 - `docs/mcp-tools.json` → **not obtainable** (F1). Replaced by `docs/rest-endpoints.json`, generated
   from the live OpenAPI document, plus `docs/mcp-tools.md` explaining the substitution and recording
